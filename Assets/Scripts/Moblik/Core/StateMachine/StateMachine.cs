@@ -1,72 +1,46 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using NaughtyAttributes;
 
-public class StateMachine : MonoBehaviour
+namespace Moblik.StateMachine
 {
-    public enum States
+    public class StateMachine<T> where T : System.Enum
     {
-        NONE,
-        IDLE,
-        RUN,
-        DEATH
-    }
+        public Dictionary<T, StateBase> dictionaryState;
+        private StateBase _currentState;
 
-    // Key
-    public Dictionary<States, StateBase> dictionaryState;
-
-    public float timeToStartGame = 1f;
-    private StateBase _currentState;
-
-    private void Awake()
-    {
-        dictionaryState = new Dictionary<States, StateBase>();
-        dictionaryState.Add(States.IDLE, new StateBase());
-
-        SwitchState(States.NONE);
-
-        Invoke(nameof(StartGame), timeToStartGame);
-    }
-
-    [Button]
-    private void StartGame()
-    {
-        SwitchState(States.NONE);
-    }
-
-#if UNITY_EDITOR
-    #region DEBUG
-    [Button]
-    private void ChangeStateToStateX()
-    {
-        SwitchState(States.NONE);
-    }
-
-    [Button]
-    private void ChangeStateToStateY()
-    {
-        SwitchState(States.NONE);
-    }
-    #endregion
-#endif
-
-    private void SwitchState(States state)
-    {
-        if (_currentState != null) _currentState.OnStateExit();
-        _currentState = dictionaryState[state];
-        _currentState.OnStateEnter();
-    }
-
-    private void Update()
-    {
-        if (_currentState != null)
+        public StateBase CurrentBase
         {
-            _currentState.OnStateStay();
+            get { return _currentState; }
         }
-        if (Input.GetKeyDown(KeyCode.O))
+
+        //public StateMachine(T state)
+        //{
+        //    SwitchState(state);
+        //}
+
+        public void Init()
         {
-            //SwitchState(States.DEATH);
+            dictionaryState = new Dictionary<T, StateBase>();
+        }
+
+        public void RegisterStates(T typeEnum, StateBase state)
+        {
+            dictionaryState.Add(typeEnum, state);
+        }
+
+        public void SwitchState(T state)
+        {
+            if (_currentState != null) _currentState.OnStateExit();
+
+            _currentState = dictionaryState[state];
+            _currentState.OnStateEnter();
+        }
+
+        public void Update()
+        {
+            if (_currentState != null)
+            {
+                _currentState.OnStateStay();
+            }
         }
     }
 }

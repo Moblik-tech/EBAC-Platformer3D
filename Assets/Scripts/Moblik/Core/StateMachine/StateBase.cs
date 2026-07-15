@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class StateBase
+namespace Moblik.StateMachine
 {
-    public virtual void OnStateEnter()
+    public class StateBase
     {
-        Debug.Log("OnStateEnter");
-    }
+        public virtual void OnStateEnter()
+        {
+            Debug.Log("OnStateEnter");
+        }
 
-    public virtual void OnStateStay()
-    {
-        Debug.Log("OnStateStay");
-    }
+        public virtual void OnStateStay()
+        {
+            Debug.Log("OnStateStay");
+        }
 
-    public virtual void OnStateExit()
-    {
-        Debug.Log("OnStateExit");
+        public virtual void OnStateExit()
+        {
+            Debug.Log("OnStateExit");
+        }
     }
 }
