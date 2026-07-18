@@ -37,5 +37,7 @@ public class PlayerStateMachineEditor : Editor
                 }
             }
         }
+
+        if (UnityEngine.Application.isPlaying) Repaint();
     }
 }

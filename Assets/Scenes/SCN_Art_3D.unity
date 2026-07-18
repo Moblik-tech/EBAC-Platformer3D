@@ -2570,7 +2570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &527981964
 Transform:
   m_ObjectHideFlags: 0
@@ -7306,7 +7306,7 @@ MonoBehaviour:
   speed: 5
   jumpForce: 7
   animationManager: {fileID: 1755247084}
-  currentState: 0
+  playerStateMachine: {fileID: 420146776}
 --- !u!54 &1414461348
 Rigidbody:
   m_ObjectHideFlags: 0

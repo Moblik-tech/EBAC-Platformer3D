@@ -10,10 +10,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Internal Components")]
     public AnimationManager animationManager;
+    public PlayerStateMachine playerStateMachine;
 
     private Rigidbody _rigidbody;
-
-    public CharacterStates currentState = CharacterStates.IDLE;
 
     private void Start()
     {
@@ -25,21 +24,19 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
-
-        Debug.Log(currentState);
     }
 
     public void Move()
     {
         Vector2 inputs = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (inputs.x != 0 || inputs.y != 0)
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            currentState = CharacterStates.MOVE;
+            playerStateMachine.stateMachine.SwitchState(CharacterStates.MOVE);
         }
         else
         {
-            currentState = CharacterStates.IDLE;
+            playerStateMachine.stateMachine.SwitchState(CharacterStates.IDLE);
         }
 
         _rigidbody.MovementWithLegacyInput(_currentSpeed);
@@ -49,7 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            currentState = CharacterStates.JUMP;
+            playerStateMachine.stateMachine.SwitchState(CharacterStates.JUMP);
+            
         }
 
         _rigidbody.JumpWithLegacyInput(jumpForce);
