@@ -1,18 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("General")]
+    public float speed = 5f;
+    private float _currentSpeed;
+
+    public float jumpForce = 7f;
+
+    [Header("Internal Components")]
+    public AnimationManager animationManager;
+
+    private Rigidbody _rigidbody;
+
+    public CharacterStates currentState = CharacterStates.IDLE;
+
+    private void Start()
     {
-        
+        _rigidbody = GetComponent<Rigidbody>();
+        _currentSpeed = speed;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Move();
+        Jump();
+
+        Debug.Log(currentState);
+    }
+
+    public void Move()
+    {
+        Vector2 inputs = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if (inputs.x != 0 || inputs.y != 0)
+        {
+            currentState = CharacterStates.MOVE;
+        }
+        else
+        {
+            currentState = CharacterStates.IDLE;
+        }
+
+        _rigidbody.MovementWithLegacyInput(_currentSpeed);
+    }
+
+    public void Jump()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            currentState = CharacterStates.JUMP;
+        }
+
+        _rigidbody.JumpWithLegacyInput(jumpForce);
     }
 }
