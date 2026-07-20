@@ -2,54 +2,94 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("General")]
+    public CharacterController characterController;
+    public Animator animator;
+
     public float speed = 5f;
-    private float _currentSpeed;
+    public float turnSpeed = 1f;
+    public float gravity = 9.8f;
 
-    public float jumpForce = 7f;
-
-    [Header("Internal Components")]
-    public AnimationManager animationManager;
-    public PlayerStateMachine playerStateMachine;
-
-    private Rigidbody _rigidbody;
-
-    private void Start()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-        _currentSpeed = speed;
-    }
+    private float _vSpeed = 0f;
 
     private void Update()
     {
-        Move();
-        Jump();
+        Movement();
     }
 
-    public void Move()
+    private void Movement()
     {
-        Vector2 inputs = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        transform.Rotate(0f, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0f);
 
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        var inputAxisVertical = Input.GetAxis("Vertical");
+        var speedVector = transform.forward * inputAxisVertical * speed;
+
+        _vSpeed -= gravity * Time.deltaTime;
+        speedVector.y = _vSpeed;
+
+        characterController.Move(speedVector * Time.deltaTime);
+
+        // Option 1
+        if (inputAxisVertical != 0f)
         {
-            playerStateMachine.stateMachine.SwitchState(CharacterStates.MOVE);
+            animator.SetBool("Run", true);
         }
         else
         {
-            playerStateMachine.stateMachine.SwitchState(CharacterStates.IDLE);
+            animator.SetBool("Run", false);
         }
 
-        _rigidbody.MovementWithLegacyInput(_currentSpeed);
+        // Option 2
+        //animator.SetBool("Run", inputAxisVertical != 0);
     }
 
-    public void Jump()
-    {
-        if (Input.GetButtonDown("Jump"))
-        {
-            playerStateMachine.stateMachine.SwitchState(CharacterStates.JUMP);
-            
-        }
+    //[Header("General")]
+    //public float speed = 5f;
+    //private float _currentSpeed;
 
-        _rigidbody.JumpWithLegacyInput(jumpForce);
-    }
+    //public float jumpForce = 7f;
+
+    //[Header("Internal Components")]
+    //public AnimationManager animationManager;
+    //public PlayerStateMachine playerStateMachine;
+
+    //private Rigidbody _rigidbody;
+
+    //private void Start()
+    //{
+    //    _rigidbody = GetComponent<Rigidbody>();
+    //    _currentSpeed = speed;
+    //}
+
+    //private void Update()
+    //{
+    //    Move();
+    //    Jump();
+    //}
+
+    //public void Move()
+    //{
+    //    Vector2 inputs = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+    //    if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+    //    {
+    //        playerStateMachine.stateMachine.SwitchState(CharacterStates.MOVE);
+    //    }
+    //    else
+    //    {
+    //        playerStateMachine.stateMachine.SwitchState(CharacterStates.IDLE);
+    //    }
+
+    //    _rigidbody.MovementWithLegacyInput(_currentSpeed);
+    //}
+
+    //public void Jump()
+    //{
+    //    if (Input.GetButtonDown("Jump"))
+    //    {
+    //        playerStateMachine.stateMachine.SwitchState(CharacterStates.JUMP);
+
+    //    }
+
+    //    _rigidbody.JumpWithLegacyInput(jumpForce);
+    //}
 }
