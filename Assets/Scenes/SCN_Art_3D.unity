@@ -7187,7 +7187,10 @@ MonoBehaviour:
   animator: {fileID: 1755247083}
   speed: 8
   turnSpeed: 200
-  gravity: 9.8
+  gravity: 13
+  jumpForce: 15
+  runKey: 304
+  runSpeed: 2
 --- !u!143 &1414461348
 CharacterController:
   m_ObjectHideFlags: 0
@@ -7212,7 +7215,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1001 &1422408844
 PrefabInstance:

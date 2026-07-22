@@ -9,7 +9,13 @@ public class PlayerController : MonoBehaviour
     public float turnSpeed = 1f;
     public float gravity = 9.8f;
 
+    public float jumpForce = 15f;
+
     private float _vSpeed = 0f;
+
+    [Header("Run Setup")]
+    public KeyCode runKey = KeyCode.LeftShift;
+    public float runSpeed = 2f;
 
     private void Update()
     {
@@ -23,8 +29,25 @@ public class PlayerController : MonoBehaviour
         var inputAxisVertical = Input.GetAxis("Vertical");
         var speedVector = transform.forward * inputAxisVertical * speed;
 
+        Jump();
+
         _vSpeed -= gravity * Time.deltaTime;
         speedVector.y = _vSpeed;
+
+        var isWalking = inputAxisVertical != 0;
+
+        if (isWalking)
+        {
+            if (Input.GetKey(runKey))
+            {
+                speedVector *= runSpeed;
+                animator.speed = runSpeed;
+            }
+            else
+            {
+                animator.speed = 1f;
+            }
+        }
 
         characterController.Move(speedVector * Time.deltaTime);
 
@@ -40,6 +63,19 @@ public class PlayerController : MonoBehaviour
 
         // Option 2
         //animator.SetBool("Run", inputAxisVertical != 0);
+    }
+
+    private void Jump()
+    {
+        if (characterController.isGrounded)
+        {
+            _vSpeed = 0f;
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                _vSpeed = jumpForce;
+            }
+        }
     }
 
     //[Header("General")]
