@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0f, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0f);
 
         var inputAxisVertical = Input.GetAxis("Vertical");
-        var speedVector = transform.forward * inputAxisVertical * speed;
+        var speedVector = inputAxisVertical * speed * transform.forward;
 
         Jump();
 
