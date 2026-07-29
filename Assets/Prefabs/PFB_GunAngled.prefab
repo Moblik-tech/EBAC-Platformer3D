@@ -51,7 +51,7 @@ MonoBehaviour:
   projectileSpeed: 50
   uIGunUpdater: []
   bulletAmount: 7
-  timeToReload: 2.5
+  timeToReload: 2
   bulletAmountPerShot: 4
   angle: 7
 --- !u!1 &1603924414554532414
