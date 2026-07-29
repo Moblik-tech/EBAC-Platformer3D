@@ -49,10 +49,11 @@ MonoBehaviour:
   positionToShoot: {fileID: 4414791165041916569}
   timeBetweenShots: 0.15
   projectileSpeed: 50
-  bulletAmount: 15
-  timeToReload: 1
+  uIGunUpdater: []
+  bulletAmount: 7
+  timeToReload: 2.5
   bulletAmountPerShot: 4
-  angle: 15
+  angle: 7
 --- !u!1 &1603924414554532414
 GameObject:
   m_ObjectHideFlags: 0

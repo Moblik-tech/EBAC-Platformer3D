@@ -50,7 +50,7 @@ MonoBehaviour:
   timeBetweenShots: 0.15
   projectileSpeed: 50
   uIGunUpdater: []
-  bulletAmount: 15
+  bulletAmount: 25
   timeToReload: 1
 --- !u!1 &9070675619894794320
 GameObject:

@@ -7384,8 +7384,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2873085406352e14e88c0f656bd79bad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunBase: {fileID: 8236667072125668109, guid: 8be6369b8a8a99e4183d429c204e8568, type: 3}
-  secondGun: {fileID: 700081377942251177, guid: 9014c39d8ffa19b49a08cea6bf167791, type: 3}
+  firstGun: {fileID: 700081377942251177, guid: 9014c39d8ffa19b49a08cea6bf167791, type: 3}
+  secondGun: {fileID: 242593686151823218, guid: f54e5f3547b43a94ab24adba5dfa88b9, type: 3}
   gunPosition: {fileID: 855786194}
 --- !u!1001 &1422408844
 PrefabInstance:

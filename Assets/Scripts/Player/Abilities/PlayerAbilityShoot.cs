@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerAbilityShoot : PlayerAbilityBase
 {
-    public GunBase gunBase;
+    public GunBase firstGun;
     public GunBase secondGun;
     public Transform gunPosition;
 
@@ -25,7 +25,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     private void CreateGun()
     {
-        _mainGun = Instantiate(gunBase, gunPosition);
+        _mainGun = Instantiate(firstGun, gunPosition);
         _secondGun = Instantiate(secondGun, gunPosition);
 
         _currentGun = _mainGun;
