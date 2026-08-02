@@ -6,7 +6,7 @@ namespace Moblik.StateMachine
     {
         public virtual void OnStateEnter()
         {
-            Debug.Log("OnStateEnter");
+            //Debug.Log("OnStateEnter");
         }
 
         public virtual void OnStateStay()
