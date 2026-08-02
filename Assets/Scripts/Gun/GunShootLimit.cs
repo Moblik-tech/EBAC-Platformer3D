@@ -20,9 +20,7 @@ public class GunShootLimit : GunBase
 
     protected override IEnumerator ShootCoroutine()
     {
-        if (_reloading) yield break;
-
-        while (true)
+        while (!_reloading)
         {
             if (_currentShots < bulletAmount)
             {
@@ -31,6 +29,11 @@ public class GunShootLimit : GunBase
                 CheckReload();
                 UpdateUI();
                 yield return new WaitForSeconds(timeBetweenShots);
+            }
+            else
+            {
+                CheckReload();
+                yield return 0.001f;
             }
         }
     }
