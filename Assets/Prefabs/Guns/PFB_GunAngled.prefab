@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabProjectile: {fileID: 4091087066002338584, guid: e1522b89aa7299545bd209e0fb332046, type: 3}
   positionToShoot: {fileID: 4414791165041916569}
-  timeBetweenShots: 0.15
+  timeBetweenShots: 0.75
   projectileSpeed: 50
   uIGunUpdater: []
   bulletAmount: 7
