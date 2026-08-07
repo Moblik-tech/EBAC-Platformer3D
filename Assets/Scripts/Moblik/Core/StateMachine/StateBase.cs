@@ -4,9 +4,9 @@ namespace Moblik.StateMachine
 {
     public class StateBase
     {
-        public virtual void OnStateEnter()
+        public virtual void OnStateEnter(params object[] objs)
         {
-            //Debug.Log("OnStateEnter");
+            Debug.Log("OnStateEnter");
         }
 
         public virtual void OnStateStay()
