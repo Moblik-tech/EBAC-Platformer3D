@@ -21,7 +21,6 @@ public class GunShootAngle : GunShootLimit
             projectile.transform.position = positionToShoot.position;
             projectile.transform.localEulerAngles = Vector3.zero + (i % 2 == 0 ? angle : -angle) * mult * Vector3.up;
             
-            projectile.projectileSpeed = projectileSpeed;
             projectile.transform.parent = null;
         }
     }

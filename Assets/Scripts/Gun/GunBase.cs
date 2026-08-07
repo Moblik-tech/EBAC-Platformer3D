@@ -7,7 +7,6 @@ public class GunBase : MonoBehaviour
 
     public Transform positionToShoot;
     public float timeBetweenShots = 0.3f;
-    public float projectileSpeed = 50f;
 
     private Coroutine _currentCoroutine;
 
@@ -25,7 +24,6 @@ public class GunBase : MonoBehaviour
         var projectile = Instantiate(prefabProjectile);
         
         projectile.transform.SetPositionAndRotation(positionToShoot.position, positionToShoot.rotation);
-        projectile.projectileSpeed = projectileSpeed;
     }
 
     public void StartShoot()
