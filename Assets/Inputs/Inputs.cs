@@ -124,7 +124,18 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dc934af7-aec0-40e6-882d-b0802a6d0a6c"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d684a6c-2c71-4027-a14e-5513991b7595"",
+                    ""path"": ""<Keyboard>/leftAlt"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
