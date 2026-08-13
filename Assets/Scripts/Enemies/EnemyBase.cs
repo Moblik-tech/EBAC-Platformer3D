@@ -94,7 +94,7 @@ namespace Moblik.Enemy
 
             if (p != null)
             {
-                p.Damage(1);
+                p.healthBase.Damage(1);
             }
         }
 
@@ -117,5 +117,11 @@ namespace Moblik.Enemy
             _animationBase.PlayAnimationByTrigger(animationType);
         }
         #endregion
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, distanceToLook);
+        }
     }
 }
