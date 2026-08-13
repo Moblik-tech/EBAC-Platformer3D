@@ -3,23 +3,19 @@ using UnityEngine;
 public class GunShootAngle : GunShootLimit
 {
     public int bulletAmountPerShot = 4;
-    public float angle = 15f;
+    public float angleBetweenProjectiles = 15f;
 
     protected override void Shoot()
     {
-        int mult = 0;
+        float startAngle = -angleBetweenProjectiles * (bulletAmountPerShot - 1) / 2f;
 
         for (int i = 0; i < bulletAmountPerShot; i++)
         {
-            if (i % 2 == 0)
-            {
-                mult++;
-            }
-
+            float currentAngle = startAngle + angleBetweenProjectiles * i;
             var projectile = Instantiate(prefabProjectile, positionToShoot);
 
             projectile.transform.position = positionToShoot.position;
-            projectile.transform.localEulerAngles = Vector3.zero + (i % 2 == 0 ? angle : -angle) * mult * Vector3.up;
+            projectile.transform.localEulerAngles = currentAngle * Vector3.up;
             
             projectile.transform.parent = null;
         }
