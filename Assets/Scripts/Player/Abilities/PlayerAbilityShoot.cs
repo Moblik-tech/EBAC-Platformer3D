@@ -21,6 +21,8 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
         inputs.Gameplay.MainGun.performed += ctx => UseMainGun();
         inputs.Gameplay.SecondGun.performed += ctx => UseSecondGun();
+
+        //inputs.Gameplay.ReloadGun.performed += ctx => FindFirstObjectByType<GunShootLimit>().StartReload();
     }
 
     private void CreateGun()

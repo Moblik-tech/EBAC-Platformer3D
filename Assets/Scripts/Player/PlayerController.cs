@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamageable
+public class PlayerController : MonoBehaviour
 {
+    public List<Collider> colliders;
     public CharacterController characterController;
     public Animator animator;
 
@@ -20,6 +21,15 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     [Header("Flash")]
     public List<FlashColor> flashColors;
+    public HealthBase healthBase;
+
+    private void Awake()
+    {
+        healthBase = GetComponent<HealthBase>();
+
+        healthBase.OnDamage += Damage;
+        healthBase.OnKill += OnKill;
+    }
 
     private void Update()
     {
@@ -79,14 +89,34 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
 
     #region LIFE
-    public void Damage(float damage)
+    public void Damage(HealthBase h)
     {
         flashColors.ForEach(i => i.Flash());
     }
 
-    public void Damage(float damage, Vector3 knockbackDirection)
+    private void OnKill(HealthBase h)
     {
-        Damage(damage);
+        animator.SetTrigger("Death");
+        colliders.ForEach(i => i.enabled = false);
+
+        Invoke(nameof(Revive), 2f);
+    }
+
+    private void Revive()
+    {
+        healthBase.ResetLife();
+        animator.SetTrigger("Revive");
+        Respawn();
+        colliders.ForEach(i => i.enabled = true);
     }
     #endregion
+
+    [NaughtyAttributes.Button]
+    public void Respawn()
+    {
+        if (CheckpointManager.Instance.HasCheckpoint())
+        {
+            transform.position = CheckpointManager.Instance.GetPositionFromLastCheckpoint();
+        }
+    }
 }
