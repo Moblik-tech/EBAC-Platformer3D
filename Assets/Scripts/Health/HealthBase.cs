@@ -1,14 +1,18 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBase : MonoBehaviour
+public class HealthBase : MonoBehaviour, IDamageable
 {
-    public float startLife = 10f;
+    public float startLife = 10;
     [SerializeField, NaughtyAttributes.ReadOnly] private float _currentLife;
     public bool destroyOnKill = false;
 
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnKill;
+
+    [Header("UI")]
+    public List<UIFillUpdater> uIFillUpdater;
 
     private void Awake()
     {
@@ -20,7 +24,7 @@ public class HealthBase : MonoBehaviour
         ResetLife();
     }
 
-    protected void ResetLife()
+    public void ResetLife()
     {
         _currentLife = startLife;
     }
@@ -48,6 +52,20 @@ public class HealthBase : MonoBehaviour
             Kill();
         }
 
+        UpdateUI();
         OnDamage?.Invoke(this);
+    }
+
+    public void Damage(float damage, Vector3 knockbackDirection)
+    {
+        Damage(damage);
+    }
+
+    private void UpdateUI()
+    {
+        if (uIFillUpdater != null)
+        {
+            uIFillUpdater.ForEach(i => i.UpdateValue((float) _currentLife / startLife));
+        }
     }
 }
