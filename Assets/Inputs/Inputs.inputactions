@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ReloadGun",
+                    "type": "Button",
+                    "id": "163f4162-40a4-455e-a01f-007bc6b0fb52",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -98,6 +107,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SecondGun",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "537b243d-ed5f-40a9-8db1-8c5f052d95ee",
+                    "path": "<Keyboard>/r",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReloadGun",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

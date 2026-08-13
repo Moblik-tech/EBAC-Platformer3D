@@ -135,6 +135,7 @@ MonoBehaviour:
   startLife: 10
   _currentLife: 0
   lookAtPlayer: 1
+  distanceToLook: 30
   startWithBorningAnimation: 1
   startAnimationDuration: 0.2
   startAnimationEaseType: 27
