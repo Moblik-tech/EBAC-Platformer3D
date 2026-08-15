@@ -4,7 +4,13 @@ using DG.Tweening;
 
 public class UIFillUpdater : MonoBehaviour
 {
-    public Image uiImage;
+    public enum UIFillType
+    {
+        NONE, HEALTH, AMMO
+    }
+
+    public Image uIImage;
+    public UIFillType uIFillType = UIFillType.NONE;
 
     [Header("Animation")]
     public float duration = 0.1f;
@@ -14,17 +20,17 @@ public class UIFillUpdater : MonoBehaviour
 
     private void OnValidate()
     {
-        if (uiImage == null) uiImage = GetComponent<Image>();
+        if (uIImage == null) uIImage = GetComponent<Image>();
     }
 
     public void UpdateValue(float f)
     {
-        uiImage.fillAmount = f;
+        uIImage.fillAmount = f;
     }
 
     public void UpdateValue(float max, float current)
     {
         if (_currentTween != null) _currentTween.Kill();
-        uiImage.DOFillAmount(1 - (current / max), duration).SetEase(ease);
+        uIImage.DOFillAmount(1 - (current / max), duration).SetEase(ease);
     }
 }

@@ -1359,7 +1359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07187cec3fc946c45867a9a36cbc4460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 310312863}
+  uIImage: {fileID: 310312863}
+  uIFillType: 1
   duration: 0.5
   ease: 1
 --- !u!114 &310312863
@@ -3843,7 +3844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07187cec3fc946c45867a9a36cbc4460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 716954720}
+  uIImage: {fileID: 716954720}
+  uIFillType: 2
   duration: 0.1
   ease: 1
 --- !u!1001 &717458231
@@ -8397,8 +8399,7 @@ MonoBehaviour:
   startLife: 10
   _currentLife: 0
   destroyOnKill: 0
-  uIFillUpdater:
-  - {fileID: 310312862}
+  uIFillUpdater: {fileID: 310312862}
 --- !u!1001 &1422408844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10441,7 +10442,7 @@ MonoBehaviour:
   startLife: 10
   _currentLife: 0
   destroyOnKill: 0
-  uIFillUpdater: []
+  uIFillUpdater: {fileID: 0}
 --- !u!1001 &1754156700
 PrefabInstance:
   m_ObjectHideFlags: 0

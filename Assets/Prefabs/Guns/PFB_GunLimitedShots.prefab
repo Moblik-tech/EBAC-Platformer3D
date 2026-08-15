@@ -48,8 +48,7 @@ MonoBehaviour:
   prefabProjectile: {fileID: 4091087066002338584, guid: e1522b89aa7299545bd209e0fb332046, type: 3}
   positionToShoot: {fileID: 4910449516176614802}
   timeBetweenShots: 0.15
-  projectileSpeed: 50
-  uIGunUpdater: []
+  uIFillUpdater: []
   bulletAmount: 25
   timeToReload: 1.25
 --- !u!1 &9070675619894794320
