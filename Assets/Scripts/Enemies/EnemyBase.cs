@@ -100,6 +100,11 @@ namespace Moblik.Enemy
 
         public virtual void Update()
         {
+            LookAtPlayer();
+        }
+
+        public void LookAtPlayer()
+        {
             if (lookAtPlayer == true && Vector3.Distance(transform.position, _playerController.transform.position) < distanceToLook)
             {
                 transform.LookAt(_playerController.transform.position);

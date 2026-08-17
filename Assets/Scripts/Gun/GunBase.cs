@@ -24,6 +24,7 @@ public class GunBase : MonoBehaviour
         var projectile = Instantiate(prefabProjectile);
         
         projectile.transform.SetPositionAndRotation(positionToShoot.position, positionToShoot.rotation);
+        CameraShaker.Instance.Shake();
     }
 
     public void StartShoot()
