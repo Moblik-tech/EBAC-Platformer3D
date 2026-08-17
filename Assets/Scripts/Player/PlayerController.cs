@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour
     public void Damage(HealthBase h)
     {
         flashColors.ForEach(i => i.Flash());
+        EffectsManager.Instance.ChangeVignette();
     }
 
     private void OnKill(HealthBase h)

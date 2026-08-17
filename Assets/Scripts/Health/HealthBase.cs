@@ -54,6 +54,7 @@ public class HealthBase : MonoBehaviour, IDamageable
 
         UpdateUI();
         OnDamage?.Invoke(this);
+        CameraShaker.Instance.Shake();
     }
 
     public void Damage(float damage, Vector3 knockbackDirection)
