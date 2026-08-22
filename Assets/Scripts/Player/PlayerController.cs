@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Moblik.Core.Singleton;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     public List<Collider> colliders;
     public CharacterController characterController;
@@ -23,9 +24,11 @@ public class PlayerController : MonoBehaviour
     public List<FlashColor> flashColors;
     public HealthBase healthBase;
 
-    private void Awake()
+    protected override void Awake()
     {
-        healthBase = GetComponent<HealthBase>();
+        base.Awake();
+
+        if (healthBase == null) healthBase = GetComponent<HealthBase>();
 
         healthBase.OnDamage += Damage;
         healthBase.OnKill += OnKill;

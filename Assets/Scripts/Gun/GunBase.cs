@@ -21,10 +21,10 @@ public class GunBase : MonoBehaviour
 
     protected virtual void Shoot()
     {
-        var projectile = Instantiate(prefabProjectile);
-        
+        var projectile = Instantiate(prefabProjectile);        
         projectile.transform.SetPositionAndRotation(positionToShoot.position, positionToShoot.rotation);
-        CameraShaker.Instance.Shake();
+
+        //CameraShaker.Instance.Shake();
     }
 
     public void StartShoot()

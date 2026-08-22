@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBase : MonoBehaviour, IDamageable
@@ -27,6 +26,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     public void ResetLife()
     {
         _currentLife = startLife;
+        UpdateUI();
     }
 
     protected virtual void Kill()
@@ -54,7 +54,7 @@ public class HealthBase : MonoBehaviour, IDamageable
 
         UpdateUI();
         OnDamage?.Invoke(this);
-        CameraShaker.Instance.Shake();
+        //CameraShaker.Instance.Shake();
     }
 
     public void Damage(float damage, Vector3 knockbackDirection)

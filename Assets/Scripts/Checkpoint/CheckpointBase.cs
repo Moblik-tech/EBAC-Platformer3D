@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckpointBase : MonoBehaviour
@@ -7,7 +5,7 @@ public class CheckpointBase : MonoBehaviour
     public MeshRenderer meshRenderer;
     [Min(1)] public int key = 1;
 
-    private bool _checkpointActived = false;
+    [SerializeField, NaughtyAttributes.ReadOnly] bool _checkpointActived = false;
     private string _checkpointKey = "CheckpointKey";
 
     private void Start()
