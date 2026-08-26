@@ -9,10 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8393642054484222672}
-  - component: {fileID: 5876853014617070824}
-  - component: {fileID: 3297245565817344391}
   m_Layer: 0
-  m_Name: PFB_Coin
+  m_Name: PFB_Coin_Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,54 +26,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4902407365407976100}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5876853014617070824
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3254956794871228565}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.2
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3297245565817344391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3254956794871228565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d71ef6399cb8bf42b9f78ce8feac07f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: 1
-  tagToCollect: Player
-  itemCollider:
-  - {fileID: 5876853014617070824}
-  graphicItem: {fileID: 5711418831882612766}
-  timeToHideGameObject: 2.5
-  collectionParticleSystem: {fileID: 0}
-  audioSource: {fileID: 0}
-  bonusAmount: 0
 --- !u!1001 &4864557179368885583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,10 +96,5 @@ PrefabInstance:
 --- !u!4 &4902407365407976100 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 320013e4a539592499129bf81c319566, type: 3}
-  m_PrefabInstance: {fileID: 4864557179368885583}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5711418831882612766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 320013e4a539592499129bf81c319566, type: 3}
   m_PrefabInstance: {fileID: 4864557179368885583}
   m_PrefabAsset: {fileID: 0}

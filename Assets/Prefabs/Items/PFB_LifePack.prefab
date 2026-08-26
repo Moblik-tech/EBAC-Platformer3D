@@ -69,7 +69,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   tagToCollect: Player
-  itemCollider: {fileID: 5876853014617070824}
+  itemCollider:
+  - {fileID: 5876853014617070824}
   graphicItem: {fileID: 6862894081327542545}
   timeToHideGameObject: 2.5
   collectionParticleSystem: {fileID: 0}
