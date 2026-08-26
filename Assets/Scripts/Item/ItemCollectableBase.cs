@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Moblik.Items
@@ -7,7 +8,7 @@ namespace Moblik.Items
         [Header("<======== General ========>")]
         public ItemType itemType;
         public string tagToCollect = "Player";
-        public Collider itemCollider;
+        public List<Collider> itemCollider;
 
         [Header("Visual")]
         public GameObject graphicItem;
@@ -29,8 +30,8 @@ namespace Moblik.Items
         {
             if (graphicItem != null) graphicItem.SetActive(false);
 
-            Invoke(nameof(HideGameObject), timeToHideGameObject);
             OnCollect();
+            Invoke(nameof(HideGameObject), timeToHideGameObject);
         }
 
         void HideGameObject()
@@ -45,7 +46,10 @@ namespace Moblik.Items
 
             ItemManager.Instance.AddByType(itemType, 1);
 
-            itemCollider.enabled = false;
+            foreach (var collider in itemCollider)
+            {
+                collider.enabled = false;
+            }
 
             //Debug.Log($"{gameObject.name} collected.");
         }
