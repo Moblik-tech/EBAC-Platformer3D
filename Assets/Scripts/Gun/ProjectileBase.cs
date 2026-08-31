@@ -4,7 +4,7 @@ using UnityEngine;
 public class ProjectileBase : MonoBehaviour
 {
     public float projectileSpeed = 50f;
-    public int damageAmount = 2;
+    public float damageAmount = 2;
     public float timeToDestroy = 2f;
 
     public List<string> tagsToHit;
