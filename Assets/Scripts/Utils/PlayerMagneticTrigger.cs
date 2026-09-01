@@ -7,7 +7,7 @@ public class PlayerMagneticTrigger : MonoBehaviour
     {
         ItemCollectableBase i = other.transform.GetComponent<ItemCollectableBase>();
 
-        if (i != null)
+        if (i != null && i.gameObject.GetComponent<Magnetic>() == null)
         {
             i.gameObject.AddComponent<Magnetic>();
         }

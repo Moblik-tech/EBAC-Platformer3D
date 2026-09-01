@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Moblik.Core.Singleton;
+using Moblik.Cloth;
 
 public class PlayerController : Singleton<PlayerController>
 {
@@ -23,6 +25,9 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Flash")]
     public List<FlashColor> flashColors;
     public HealthBase healthBase;
+
+    [Space]
+    [SerializeField] private ClothChanger _clothChanger;
 
     protected override void Awake()
     {
@@ -122,5 +127,31 @@ public class PlayerController : Singleton<PlayerController>
         {
             transform.position = CheckpointManager.Instance.GetPositionFromLastCheckpoint();
         }
+    }
+
+    public void ChangeSpeed(float speedMultiplier, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(speedMultiplier, duration));
+    }
+
+    IEnumerator ChangeSpeedCoroutine(float speedMultiplier, float duration)
+    {
+        var defaultSpeed = speed;
+        speed *= speedMultiplier;
+
+        yield return new WaitForSeconds(duration);
+        speed = defaultSpeed;
+    }
+
+    public void ChangeTexture(ClothSetup setup, float duration)
+    {
+        StartCoroutine(ChangeTextureCoroutine(setup, duration));
+    }
+
+    IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
+    {
+        _clothChanger.ChangeTexture(setup);
+        yield return new WaitForSeconds(duration);
+        _clothChanger.ResetTexture();
     }
 }
