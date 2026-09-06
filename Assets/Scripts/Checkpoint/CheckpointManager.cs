@@ -1,6 +1,6 @@
 using UnityEngine;
-using Moblik.Core.Singleton;
 using System.Collections.Generic;
+using Moblik.Core.Singleton;
 
 public class CheckpointManager : Singleton<CheckpointManager>
 {

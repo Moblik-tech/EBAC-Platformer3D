@@ -10,44 +10,43 @@ public class CheckpointBase : MonoBehaviour
 
     private void Start()
     {
-        TurnOff();
+        ChangeTotemLight(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (_checkpointActived == false && other.CompareTag("Player"))
         {
-            ValidateCheckpoint();
+            UpdateCheckpointStatus();
         }
     }
 
-    private void ValidateCheckpoint()
+    private void UpdateCheckpointStatus()
     {
         SaveCheckpoint();
-        TurnOn();
+        ChangeTotemLight(true);
     }
 
-    [NaughtyAttributes.Button]
-    private void TurnOn()
+    private void ChangeTotemLight(bool activated)
     {
-        meshRenderer.material.SetColor("_EmissionColor", Color.white);
-    }
-
-    [NaughtyAttributes.Button]
-    private void TurnOff()
-    {
-        meshRenderer.material.SetColor("_EmissionColor", Color.grey);
+        if (activated == true)
+        {
+            meshRenderer.material.SetColor("_EmissionColor", Color.white);
+        }
+        else
+        {
+            meshRenderer.material.SetColor("_EmissionColor", Color.grey);
+        }
     }
 
     private void SaveCheckpoint()
     {
-        /*if (PlayerPrefs.GetInt(_checkpointKey, 0) > key)
+        if (PlayerPrefs.GetInt(_checkpointKey, 0) > key)
         {
             PlayerPrefs.SetInt(_checkpointKey, key);
-        }*/
+        }
 
         CheckpointManager.Instance.SaveCheckpoint(key);
-
         _checkpointActived = true;
     }
 }

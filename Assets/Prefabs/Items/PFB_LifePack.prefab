@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8393642054484222672}
   - component: {fileID: 5876853014617070824}
   - component: {fileID: 3476125290998569549}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PFB_LifePack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

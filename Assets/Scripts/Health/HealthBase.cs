@@ -7,6 +7,7 @@ public class HealthBase : MonoBehaviour, IDamageable
 {
     public float startLife = 10;
     [SerializeField, NaughtyAttributes.ReadOnly] private float _currentLife;
+    public Collider contactCollider;
     public bool destroyOnKill = false;
 
     public Action<HealthBase> OnDamage;
@@ -35,8 +36,10 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     protected virtual void Kill()
     {
-        if (destroyOnKill)
-            Destroy(gameObject, 3f);
+        // Exclui todas as layers de contato com esse GameObject. Outra forma de fazer isso seria de pôr "-1" ao atribuir o valor da exclusão.
+        if (contactCollider != null) contactCollider.excludeLayers = Physics.AllLayers;
+
+        if (destroyOnKill) Destroy(gameObject, 1.5f);
 
         OnKill?.Invoke(this);
     }

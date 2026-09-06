@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8393642054484222672}
   - component: {fileID: 5876853014617070824}
   - component: {fileID: 3297245565817344391}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PFB_Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

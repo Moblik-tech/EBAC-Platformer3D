@@ -129,9 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db3cc78fcb508d4292108e0e9d7d60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 2804819129426663470}
+  entityCollider: {fileID: 2804819129426663470}
   flashColor: {fileID: 8712881132930047109}
-  particleSystem: {fileID: 3880382653389165705}
+  bloodParticleSystem: {fileID: 3880382653389165705}
   startLife: 10
   _currentLife: 0
   lookAtPlayer: 0

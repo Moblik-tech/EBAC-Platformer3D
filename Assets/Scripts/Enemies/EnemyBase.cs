@@ -6,9 +6,9 @@ namespace Moblik.Enemy
 {
     public class EnemyBase : MonoBehaviour, IDamageable
     {
-        public Collider collider;
+        public Collider entityCollider;
         public FlashColor flashColor;
-        public ParticleSystem particleSystem;
+        public ParticleSystem bloodParticleSystem;
         public float startLife = 10f;
         [SerializeField, NaughtyAttributes.ReadOnly] private float _currentLife;
         
@@ -56,7 +56,7 @@ namespace Moblik.Enemy
 
         protected virtual void OnKill()
         {
-            if (collider != null) collider.enabled = false;
+            if (entityCollider != null) entityCollider.enabled = false;
             PlayAnimationByTrigger(AnimationType.DEATH);
             Destroy(gameObject, 3f);
         }
@@ -64,7 +64,7 @@ namespace Moblik.Enemy
         public void OnDamage(float damage)
         {
             if (flashColor != null) flashColor.Flash();
-            if (particleSystem != null) particleSystem.Play();
+            if (bloodParticleSystem != null) bloodParticleSystem.Play();
 
             transform.position -= transform.forward;
 
