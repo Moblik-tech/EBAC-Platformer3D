@@ -7,7 +7,7 @@ public class ProjectileBase : MonoBehaviour
     public float damageAmount = 2;
     public float timeToDestroy = 2f;
 
-    public List<string> tagsToHit;
+    //public List<string> tagsToHit;
 
     private void Awake()
     {

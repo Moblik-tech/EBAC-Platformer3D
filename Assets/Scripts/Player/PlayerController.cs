@@ -17,6 +17,7 @@ public class PlayerController : Singleton<PlayerController>
     public float jumpForce = 15f;
 
     private float _vSpeed = 0f;
+    private bool _jumping = false;
 
     [Header("Run Setup")]
     public KeyCode runKey = KeyCode.LeftShift;
@@ -87,11 +88,23 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (characterController.isGrounded)
         {
+            if (_jumping)
+            {
+                _jumping = false;
+                animator.SetTrigger("Land");
+            }
+
             _vSpeed = 0f;
 
             if (Input.GetButtonDown("Jump"))
             {
                 _vSpeed = jumpForce;
+
+                if (!_jumping)
+                {
+                    _jumping = true;
+                    animator.SetTrigger("Jump");
+                }
             }
         }
     }
