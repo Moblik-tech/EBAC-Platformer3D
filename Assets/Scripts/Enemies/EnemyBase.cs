@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using Moblik.Animation;
+using UnityEngine.Events;
 
 namespace Moblik.Enemy
 {
@@ -25,6 +26,9 @@ namespace Moblik.Enemy
         [Space(15)]
 
         [SerializeField] private AnimationBase _animationBase;
+
+        [Header("Events")]
+        public UnityEvent OnKillEvent;
 
         private PlayerController _playerController;
 
@@ -58,6 +62,7 @@ namespace Moblik.Enemy
         {
             if (entityCollider != null) entityCollider.enabled = false;
             PlayAnimationByTrigger(AnimationType.DEATH);
+            OnKillEvent?.Invoke();
             Destroy(gameObject, 3f);
         }
 
@@ -88,9 +93,9 @@ namespace Moblik.Enemy
             transform.DOMove(transform.position - knockbackDirection, 0.1f);
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision other)
         {
-            PlayerController p = collision.transform.GetComponent<PlayerController>();
+            PlayerController p = other.transform.GetComponent<PlayerController>();
 
             if (p != null)
             {

@@ -25,6 +25,7 @@ public class CheckpointBase : MonoBehaviour
     {
         SaveCheckpoint();
         ChangeTotemLight(true);
+        SaveManager.Instance.SaveParams();
     }
 
     private void ChangeTotemLight(bool activated)

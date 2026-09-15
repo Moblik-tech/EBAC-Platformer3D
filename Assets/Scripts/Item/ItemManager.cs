@@ -16,6 +16,13 @@ namespace Moblik.Items
         private void Start()
         {
             Reset();
+            LoadItemsFromSave();
+        }
+
+        private void LoadItemsFromSave()
+        {
+            AddByType(ItemType.COIN, SaveManager.Instance.Setup.coinAmount);
+            AddByType(ItemType.LIFE_PACK, SaveManager.Instance.Setup.lifePackAmount);
         }
 
         private void Reset()

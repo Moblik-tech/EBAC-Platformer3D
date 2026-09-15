@@ -6,7 +6,7 @@ using Moblik.Cloth;
 public class HealthBase : MonoBehaviour, IDamageable
 {
     public float startLife = 10;
-    [SerializeField, NaughtyAttributes.ReadOnly] private float _currentLife;
+    [SerializeField, NaughtyAttributes.ReadOnly] public float _currentLife;
     public Collider contactCollider;
     public bool destroyOnKill = false;
 
