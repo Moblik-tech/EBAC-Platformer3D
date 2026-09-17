@@ -1,7 +1,7 @@
 {
     "currentLevelNumber": 0,
-    "coinAmount": 0,
+    "coinAmount": 1,
     "lifePackAmount": 0,
     "playerCurrentHealth": 10.0,
-    "currentCloth": 2
+    "currentArmour": 0
 }
