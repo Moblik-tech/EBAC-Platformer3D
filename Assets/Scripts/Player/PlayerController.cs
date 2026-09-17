@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Moblik.Core.Singleton;
-using Moblik.Cloth;
+using Moblik.Utils;
 
 public class PlayerController : Singleton<PlayerController>
 {
@@ -10,10 +10,11 @@ public class PlayerController : Singleton<PlayerController>
     public CharacterController characterController;
     public Animator animator;
 
+    [Header("Movement")]
     public float speed = 5f;
+
     public float turnSpeed = 1f;
     public float gravity = 9.8f;
-
     public float jumpForce = 15f;
 
     private float _vSpeed = 0f;
@@ -27,8 +28,11 @@ public class PlayerController : Singleton<PlayerController>
     public List<FlashColor> flashColors;
     public HealthBase healthBase;
 
-    [Space]
-    [SerializeField] private ClothChanger _clothChanger;
+    [Header("Armour")]
+    [SerializeField] private ArmourChanger _armourChanger;
+    [SerializeField] private ArmourType _currentArmour = ArmourType.NONE;
+
+    public ArmourType CurrentArmour => _currentArmour;
 
     protected override void Awake()
     {
@@ -73,15 +77,7 @@ public class PlayerController : Singleton<PlayerController>
         }
 
         characterController.Move(speedVector * Time.deltaTime);
-
-        if (inputAxisVertical != 0f)
-        {
-            animator.SetBool("Run", true);
-        }
-        else
-        {
-            animator.SetBool("Run", false);
-        }
+        animator.SetBool("Run", inputAxisVertical != 0f);
     }
 
     private void Jump()
@@ -110,6 +106,7 @@ public class PlayerController : Singleton<PlayerController>
     }
 
     #region LIFE
+
     public void Damage(HealthBase h)
     {
         flashColors.ForEach(i => i.Flash());
@@ -129,8 +126,10 @@ public class PlayerController : Singleton<PlayerController>
         healthBase.ResetLife();
         animator.SetTrigger("Revive");
         Respawn();
+
         colliders.ForEach(i => i.enabled = true);
     }
+
     #endregion
 
     [NaughtyAttributes.Button]
@@ -142,29 +141,28 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    public void ChangeSpeed(float speedMultiplier, float duration)
+    #region ARMOUR
+
+    public void ChangeArmour(ArmourType armourType)
     {
-        StartCoroutine(ChangeSpeedCoroutine(speedMultiplier, duration));
+        var setup = ArmourManager.Instance.GetSetupByType(armourType);
+
+        if (setup == null)
+        {
+            Debug.LogWarning($"Armour setup not found for type: {armourType}");
+            return;
+        }
+
+        _currentArmour = armourType;
+        ApplyArmourStats(setup);
+        _armourChanger.ChangeTexture(setup);
     }
 
-    IEnumerator ChangeSpeedCoroutine(float speedMultiplier, float duration)
+    private void ApplyArmourStats(ArmourSetup setup)
     {
-        var defaultSpeed = speed;
-        speed *= speedMultiplier;
-
-        yield return new WaitForSeconds(duration);
-        speed = defaultSpeed;
+        speed = setup.armourStats.newSpeed;
+        healthBase.damageReduction = setup.armourStats.damageReduction;
     }
 
-    public void ChangeTexture(ClothSetup setup, float duration)
-    {
-        StartCoroutine(ChangeTextureCoroutine(setup, duration));
-    }
-
-    IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
-    {
-        _clothChanger.ChangeTexture(setup);
-        yield return new WaitForSeconds(duration);
-        _clothChanger.ResetTexture();
-    }
+    #endregion
 }

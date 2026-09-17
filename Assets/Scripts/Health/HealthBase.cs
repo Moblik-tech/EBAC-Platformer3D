@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using UnityEngine;
-using Moblik.Cloth;
 
 public class HealthBase : MonoBehaviour, IDamageable
 {
@@ -16,7 +14,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     [Header("UI")]
     public UIFillUpdater uIFillUpdater;
 
-    public float damageMultiplier = 1f;
+    public float damageReduction = 0f;
 
     private void Awake()
     {
@@ -52,7 +50,7 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     public void Damage(float damage)
     {
-        _currentLife -= damage * damageMultiplier;
+        _currentLife -= damage - damageReduction;
 
         if (_currentLife <= 0)
         {
@@ -75,17 +73,5 @@ public class HealthBase : MonoBehaviour, IDamageable
         {
             uIFillUpdater.UpdateValue(_currentLife / startLife);
         }
-    }
-
-    public void ChangeDamageMultiplier(float damage, float duration)
-    {
-        StartCoroutine(ChangeDamageMultiplierCoroutine(damage, duration));
-    }
-
-    IEnumerator ChangeDamageMultiplierCoroutine(float damageMultiplier, float duration)
-    {
-        this.damageMultiplier = damageMultiplier;
-        yield return new WaitForSeconds(duration);
-        this.damageMultiplier = 1f;
     }
 }

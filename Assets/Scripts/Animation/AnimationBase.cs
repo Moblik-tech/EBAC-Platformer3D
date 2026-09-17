@@ -1,13 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Moblik.Utils;
 
 namespace Moblik.Animation
 {
-    public enum AnimationType
-    {
-        NONE, IDLE, RUN, ATTACK, DEATH
-    }
-
     public class AnimationBase : MonoBehaviour
     {
         public Animator animator;
@@ -22,12 +18,5 @@ namespace Moblik.Animation
                 animator.SetTrigger(setup.triggerName);
             }
         }
-    }
-
-    [System.Serializable]
-    public class AnimationSetup
-    {
-        public AnimationType animationType;
-        public string triggerName;
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
-using Moblik.Items;
+using Moblik.Utils;
+using Moblik.Manager;
 
 public class ActionLifePack : MonoBehaviour
 {
@@ -8,14 +9,14 @@ public class ActionLifePack : MonoBehaviour
 
     private void Start()
     {
-        sOInt = ItemManager.Instance.GetItemByType(ItemType.LIFE_PACK).sOInt;
+        sOInt = InventoryManager.Instance.GetItemByType(ItemType.LIFE_PACK).scriptobInt;
     }
 
     private void RecoverLife()
     {
         if (sOInt.value > 0)
         {
-            ItemManager.Instance.RemoveByType(ItemType.LIFE_PACK, 1);
+            InventoryManager.Instance.RemoveByType(ItemType.LIFE_PACK, 1);
 
             PlayerController.Instance.healthBase.ResetLife();
         }

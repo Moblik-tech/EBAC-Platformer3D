@@ -1,7 +1,8 @@
+using DG.Tweening;
+using Moblik.Manager;
+using Moblik.Utils;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
-using Moblik.Items;
 
 public class ChestItemCoin : ChestItemBase
 {
@@ -39,7 +40,7 @@ public class ChestItemCoin : ChestItemBase
         {
             item.transform.DOMoveY(2f, tweenEndTime).SetRelative();
             item.transform.DOScale(0, tweenEndTime / 2).SetDelay(tweenEndTime / 2);
-            ItemManager.Instance.AddByType(ItemType.COIN, 1);
+            InventoryManager.Instance.AddByType(ItemType.COIN, 1);
         }
     }
 }

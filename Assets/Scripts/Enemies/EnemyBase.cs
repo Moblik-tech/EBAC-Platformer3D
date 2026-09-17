@@ -1,7 +1,8 @@
 using UnityEngine;
 using DG.Tweening;
-using Moblik.Animation;
 using UnityEngine.Events;
+using Moblik.Animation;
+using Moblik.Utils;
 
 namespace Moblik.Enemy
 {
