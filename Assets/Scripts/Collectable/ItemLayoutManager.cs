@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Moblik.Manager;
 
 namespace Moblik.Items
 {
@@ -17,7 +18,7 @@ namespace Moblik.Items
 
         private void CreateItems()
         {
-            foreach (var setup in ItemManager.Instance.itemSetup)
+            foreach (var setup in InventoryManager.Instance.itemSetup)
             {
                 var item = Instantiate(prefabLayout, container);
                 item.Load(setup);

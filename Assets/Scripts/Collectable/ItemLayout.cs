@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Moblik.Utils;
 
 namespace Moblik.Items
 {
@@ -19,12 +20,12 @@ namespace Moblik.Items
 
         private void UpdateUI()
         {
-            uIIcon.sprite = _currentSetup.icon;
+            uIIcon.sprite = _currentSetup.itemIcon;
         }
 
         private void Update()
         {
-            uITextValue.text = _currentSetup.sOInt.value.ToString();
+            uITextValue.text = _currentSetup.scriptobInt.value.ToString();
         }
     }
 }
