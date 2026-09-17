@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8393642054484222672}
   - component: {fileID: 5876853014617070824}
-  - component: {fileID: 3476125290998569549}
+  - component: {fileID: 2767002020262544778}
   m_Layer: 9
   m_Name: PFB_LifePack
   m_TagString: Untagged
@@ -55,7 +55,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3476125290998569549
+--- !u!114 &2767002020262544778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,17 +64,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3254956794871228565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a32c920039acc14eac6a9bd67c63912, type: 3}
+  m_Script: {fileID: 11500000, guid: 23f1088fe4c16134390801112c11eb7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 2
   tagToCollect: Player
-  itemCollider:
-  - {fileID: 5876853014617070824}
-  graphicItem: {fileID: 6862894081327542545}
-  timeToHideGameObject: 2.5
+  delayToHideObject: 2
+  objectCollider: []
+  graphicObject: {fileID: 6862894081327542545}
   collectionParticleSystem: {fileID: 0}
-  audioSource: {fileID: 0}
+  collectionAudioSource: {fileID: 0}
+  itemType: 2
+  amountEarned: 1
 --- !u!1 &6862894081327542545
 GameObject:
   m_ObjectHideFlags: 0
