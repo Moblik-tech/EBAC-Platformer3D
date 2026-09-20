@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Moblik.Utils;
 
 public class GunShootLimit : GunBase
 {
@@ -75,6 +76,6 @@ public class GunShootLimit : GunBase
 
     private void GetAllUIs()
     {
-        uIFillUpdater = GameObject.FindObjectsOfType<UIFillUpdater>().Where(i => i.uIFillType == UIFillUpdater.UIFillType.AMMO).ToList();
+        uIFillUpdater = GameObject.FindObjectsOfType<UIFillUpdater>().Where(i => i.uIFillType == UIStatsDisplayType.AMMO).ToList();
     }
 }

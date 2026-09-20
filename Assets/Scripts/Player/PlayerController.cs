@@ -161,7 +161,7 @@ public class PlayerController : Singleton<PlayerController>
     private void ApplyArmourStats(ArmourSetup setup)
     {
         speed = setup.armourStats.newSpeed;
-        healthBase.damageReduction = setup.armourStats.damageReduction;
+        healthBase.damageReductionAmount = setup.armourStats.damageReduction;
     }
 
     #endregion

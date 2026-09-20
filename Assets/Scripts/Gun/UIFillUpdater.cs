@@ -1,16 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Moblik.Utils;
 
 public class UIFillUpdater : MonoBehaviour
 {
-    public enum UIFillType
-    {
-        NONE, HEALTH, AMMO
-    }
-
     public Image uIImage;
-    public UIFillType uIFillType = UIFillType.NONE;
+    public UIStatsDisplayType uIFillType = UIStatsDisplayType.NONE;
 
     [Header("Animation")]
     public float duration = 0.1f;
@@ -30,7 +26,7 @@ public class UIFillUpdater : MonoBehaviour
 
     public void UpdateValue(float max, float current)
     {
-        if (_currentTween != null) _currentTween.Kill();
-        uIImage.DOFillAmount(1 - (current / max), duration).SetEase(ease);
+        _currentTween?.Kill();
+        _currentTween = uIImage.DOFillAmount(current / max, duration).SetEase(ease);
     }
 }

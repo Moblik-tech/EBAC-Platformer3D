@@ -2,41 +2,80 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
-public class DestructableItemBase : MonoBehaviour
+public class DestructableProp : MonoBehaviour
 {
-    public HealthBase healthBase;
+    [Header("Health")]
+    [SerializeField] private HealthBase healthBase;
 
-    public float shakeDuration = 0.1f;
-    public int shakeForce = 1;
+    [Header("Visual")]
+    [SerializeField] private Transform graphicObject;
+    [SerializeField] private float scaleDuration = 0.1f;
 
-    public int coinDropAmount = 10;
-    public GameObject coinPrefab;
-    public Transform dropPosition;
+    [Header("Hit Feedback")]
+    [SerializeField] private float shakeDuration = 0.1f;
+    [SerializeField] private int shakeForce = 1;
 
-    private void OnValidate()
-    {
-        if (healthBase == null) healthBase = GetComponent<HealthBase>();
-    }
+    [Header("Coin Drop")]
+    [SerializeField] private int coinDropAmount = 10;
+    [SerializeField] private GameObject coinPrefab;
+    [SerializeField] private Transform dropPosition;
+    [SerializeField] private float coinDropDelay = 0.1f;
+
+    private Vector3 _initialGraphicScale;
 
     private void Awake()
     {
-        OnValidate();
+        if (healthBase == null) healthBase = GetComponent<HealthBase>();
+
+        _initialGraphicScale = graphicObject.localScale;
+
         healthBase.OnDamage += OnDamage;
+        healthBase.OnKill += OnKill;
     }
 
-    private void OnDamage(HealthBase h)
+    private void OnDestroy()
     {
-        transform.DOShakeScale(shakeDuration, Vector3.up, shakeForce);
-        DropCoins();
+        if (healthBase == null) return;
+
+        healthBase.OnDamage -= OnDamage;
+        healthBase.OnKill -= OnKill;
+    }
+
+    private void OnDamage(HealthBase health)
+    {
+        ShakeGraphic();
+        UpdateGraphicScale(health);
+    }
+
+    private void OnKill(HealthBase health)
+    {
+        DropMultipleCoins();
+    }
+
+    private void ShakeGraphic()
+    {
+        graphicObject.DOKill();
+        graphicObject.DOShakeScale(shakeDuration, Vector3.up, shakeForce);
+    }
+
+    private void UpdateGraphicScale(HealthBase health)
+    {
+        float healthPercent = Mathf.Clamp01(health._currentLife / health.startLife);
+
+        Vector3 targetScale = _initialGraphicScale;
+        targetScale.y *= healthPercent;
+
+        graphicObject.DOKill();
+        graphicObject.DOScale(targetScale, scaleDuration).SetEase(Ease.OutBack);
     }
 
     [NaughtyAttributes.Button]
     private void DropCoins()
     {
-        var i = Instantiate(coinPrefab);
+        GameObject coin = Instantiate(coinPrefab, dropPosition.position, Quaternion.identity);
 
-        i.transform.position = dropPosition.position;
-        i.transform.DOScale(0, 0.1f).SetEase(Ease.OutBack).From();
+        coin.transform.localScale = Vector3.zero;
+        coin.transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutBack);
     }
 
     [NaughtyAttributes.Button]
@@ -59,7 +98,8 @@ public class DestructableItemBase : MonoBehaviour
         for (int i = 0; i < coinDropAmount; i++)
         {
             DropCoins();
-            yield return new WaitForSeconds(0.1f);
+
+            yield return new WaitForSeconds(coinDropDelay);
         }
     }
 }

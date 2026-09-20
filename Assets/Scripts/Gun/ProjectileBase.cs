@@ -4,10 +4,8 @@ using UnityEngine;
 public class ProjectileBase : MonoBehaviour
 {
     public float projectileSpeed = 50f;
-    public float damageAmount = 2;
+    public int damageAmount = 2;
     public float timeToDestroy = 2f;
-
-    //public List<string> tagsToHit;
 
     private void Awake()
     {
@@ -20,27 +18,16 @@ public class ProjectileBase : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {/*
-        foreach(var t in tagsToHit)
+    {
+        if (collision.transform.TryGetComponent<IDamageable>(out var damageable))
         {
-            if (collision.collider.CompareTag(t))
-            {*/
-                var damageable = collision.transform.GetComponent<IDamageable>();
+            Vector3 knockbackDirection = collision.transform.position - transform.position;
 
-                if (damageable != null)
-                {
-                    Vector3 knockbackDirection = collision.transform.position - transform.position;
+            knockbackDirection = -knockbackDirection.normalized;
+            knockbackDirection.y = 0;
 
-                    knockbackDirection = -knockbackDirection.normalized;
-                    knockbackDirection.y = 0;
-
-                    damageable.Damage(damageAmount, knockbackDirection);
-                }
-                /*
-                break;
-            }
-        }*/
-
+            damageable.Damage(damageAmount/*, knockbackDirection*/);
+        }
         Destroy(gameObject);
     }
 }

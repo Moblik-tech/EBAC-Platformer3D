@@ -36,7 +36,7 @@ namespace Moblik.Utils
     public class ArmourStats
     {
         public float newSpeed = 1f;
-        public float damageReduction = 1f;
+        public int damageReduction = 1;
     }
 
     [Serializable]

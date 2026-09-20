@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uIImage: {fileID: 310312863}
   uIFillType: 1
-  duration: 0.5
+  duration: 0.2
   ease: 1
 --- !u!114 &310312863
 MonoBehaviour:
@@ -12531,12 +12531,12 @@ MonoBehaviour:
     armourTexture: {fileID: 2800000, guid: 0d4af6a2c201403418355714b0ceb9cb, type: 3}
     armourStats:
       newSpeed: 7
-      damageReduction: 1.5
+      damageReduction: 2
   - armourType: 2
     armourTexture: {fileID: 2800000, guid: b7750101b59fca449afbd0b0792bc1c9, type: 3}
     armourStats:
       newSpeed: 12
-      damageReduction: 0.5
+      damageReduction: 1
 --- !u!1001 &980793272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15542,10 +15542,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startLife: 10
   _currentLife: 0
-  contactCollider: {fileID: 0}
-  destroyOnKill: 0
+  damageReductionAmount: 0
+  destroyObjectOnKill: 0
+  hitboxCollider: {fileID: 1414461350}
   uIFillUpdater: {fileID: 310312862}
-  damageReduction: 0
 --- !u!1001 &1422408844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22914,10 +22914,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startLife: 10
   _currentLife: 0
-  contactCollider: {fileID: 0}
-  destroyOnKill: 0
+  damageReductionAmount: 0
+  destroyObjectOnKill: 0
+  hitboxCollider: {fileID: 0}
   uIFillUpdater: {fileID: 0}
-  damageReduction: 0
 --- !u!1001 &1754156700
 PrefabInstance:
   m_ObjectHideFlags: 0

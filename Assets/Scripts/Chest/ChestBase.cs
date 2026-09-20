@@ -45,9 +45,7 @@ public class ChestBase : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        PlayerController p = other.transform.GetComponent<PlayerController>();
-
-        if (p != null)
+        if (other.transform.TryGetComponent<PlayerController>(out var p))
         {
             UpdateNotificationStatus(true);
         }
@@ -55,9 +53,8 @@ public class ChestBase : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        PlayerController p = other.transform.GetComponent<PlayerController>();
-
-        if (p != null)
+        
+        if (other.transform.TryGetComponent<PlayerController>(out var p))
         {
             UpdateNotificationStatus(false);
         }

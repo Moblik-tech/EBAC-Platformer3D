@@ -67,7 +67,7 @@ namespace Moblik.Enemy
             Destroy(gameObject, 3f);
         }
 
-        public void OnDamage(float damage)
+        public void OnDamage(int damage)
         {
             if (flashColor != null) flashColor.Flash();
             if (bloodParticleSystem != null) bloodParticleSystem.Play();
@@ -82,13 +82,13 @@ namespace Moblik.Enemy
             }
         }
 
-        public void Damage(float damage)
+        public void Damage(int damage)
         {
             Debug.Log("Hit");
             OnDamage(damage);
         }
 
-        public void Damage(float damage, Vector3 knockbackDirection)
+        public void Damage(int damage, Vector3 knockbackDirection)
         {
             OnDamage(damage);
             transform.DOMove(transform.position - knockbackDirection, 0.1f);
