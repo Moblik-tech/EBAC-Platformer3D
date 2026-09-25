@@ -4986,14 +4986,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBase: {fileID: 5736297977954954360}
-  graphicObject: {fileID: 3827501513683878886}
+  graphicObject: {fileID: 7343762339216608105}
   scaleDuration: 0.1
   shakeDuration: 0.1
   shakeForce: 1
   coinDropAmount: 5
   coinPrefab: {fileID: 3254956794871228565, guid: c932dee420278ab4eb4746d6ee133fab, type: 3}
   dropPosition: {fileID: 7533464477609988024}
-  coinDropDelay: 0.1
+  coinDropDelay: 0.05
 --- !u!1001 &1508669424921045332
 PrefabInstance:
   m_ObjectHideFlags: 0

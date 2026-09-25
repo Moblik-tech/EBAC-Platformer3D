@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 2804819129426663470}
   - component: {fileID: 6501281103825159306}
   - component: {fileID: 1606606092620138377}
+  - component: {fileID: -3278038057773379354}
   m_Layer: 7
   m_Name: Enemy_02
   m_TagString: Enemy
@@ -130,16 +131,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityCollider: {fileID: 2804819129426663470}
+  healthBase: {fileID: 0}
   flashColor: {fileID: 6795287489345207494}
   bloodParticleSystem: {fileID: 7259117989181513903}
-  startLife: 25
-  _currentLife: 0
   lookAtPlayer: 0
   distanceToLook: 0
   startWithBorningAnimation: 1
   startAnimationDuration: 1
   startAnimationEaseType: 27
   _animationBase: {fileID: 1606606092620138377}
+  OnKillEvent:
+    m_PersistentCalls:
+      m_Calls: []
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -170,6 +173,24 @@ MonoBehaviour:
     triggerName: Attack
   - animationType: 4
     triggerName: Death
+--- !u!114 &-3278038057773379354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5538875036680834394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6efa58299ee8a8b4fb8850fe89ca670f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startLife: 10
+  _currentLife: 0
+  damageReductionAmount: 0
+  destroyObjectOnKill: 0
+  hitboxCollider: {fileID: 2804819129426663470}
+  uIFillUpdater: {fileID: 0}
 --- !u!1001 &6158137485234325883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -339,6 +360,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   color: {r: 0.6509434, g: 0.06448024, b: 0.06448024, a: 1}
   duration: 0.15
+  colorParameter: _EmissionColor
 --- !u!23 &3984578289676285432 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5144924261696689607, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
