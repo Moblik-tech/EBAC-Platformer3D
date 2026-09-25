@@ -16,9 +16,9 @@ public class EndGame : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController p = other.transform.GetComponent<PlayerController>();
+        PlayerController player = other.transform.GetComponent<PlayerController>();
 
-        if (!_endGame && p != null)
+        if (!_endGame && player != null)
         {
             ShowEndGame();
         }
@@ -33,6 +33,6 @@ public class EndGame : MonoBehaviour
             end.transform.DOScale(0, 0.2f).SetEase(Ease.OutBack).From();
         }
         
-        SaveManager.Instance.SaveLastLevel(currentLevel);
+        //SaveManager.Instance.SaveLastLevel(currentLevel);
     }
 }

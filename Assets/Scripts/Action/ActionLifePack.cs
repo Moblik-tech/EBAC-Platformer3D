@@ -14,7 +14,7 @@ public class ActionLifePack : MonoBehaviour
 
     private void RecoverLife()
     {
-        if (sOInt.value > 0 && PlayerController.Instance.healthBase._currentLife < PlayerController.Instance.healthBase.startLife)
+        if (sOInt.amount > 0 && PlayerController.Instance.healthBase.CurrentLife < PlayerController.Instance.healthBase.startLife)
         {
             InventoryManager.Instance.RemoveByType(ItemType.LIFE_PACK, 1);
             PlayerController.Instance.healthBase.ResetLife();

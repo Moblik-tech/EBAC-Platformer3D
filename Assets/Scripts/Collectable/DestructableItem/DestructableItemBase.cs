@@ -60,7 +60,7 @@ public class DestructableProp : MonoBehaviour
 
     private void UpdateGraphicScale(HealthBase health)
     {
-        float healthPercent = Mathf.Clamp01(health._currentLife / health.startLife);
+        float healthPercent = Mathf.Clamp01(health.CurrentLife / health.startLife);
 
         Vector3 targetScale = _initialGraphicScale;
         targetScale.y *= healthPercent;

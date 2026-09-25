@@ -25,7 +25,7 @@ namespace Moblik.Items
 
         private void Update()
         {
-            uITextValue.text = _currentSetup.scriptobInt.value.ToString();
+            uITextValue.text = _currentSetup.scriptobInt.amount.ToString();
         }
     }
 }

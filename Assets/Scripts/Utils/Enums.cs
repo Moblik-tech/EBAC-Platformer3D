@@ -17,21 +17,31 @@ namespace Moblik.Utils
 
     public enum CharacterStates
     {
-        IDLE, MOVE, JUMP, ATTACK, DEATH
+        NONE, IDLE, MOVE, JUMP, ATTACK, DEATH
     }
 
     public enum BossStates
     {
-        INIT, IDLE, PATROL, PURSUE, ATTACK, DEATH
+        NONE, INIT, IDLE, PATROL, PURSUE, ATTACK, DEATH
     }
 
     public enum GameStates
     {
-        INTRO, GAMEPLAY, PAUSE, WIN, LOSE
+        NONE, INTRO, GAMEPLAY, PAUSE, WIN, LOSE
     }
 
     public enum UIStatsDisplayType
     {
         NONE, HEALTH, AMMO, MANA
+    }
+
+    public enum MusicType
+    {
+        NONE, CALM, BATTLE, VICTORY, LOSE
+    }
+
+    public enum SFXType
+    {
+        NONE, COIN, LIFE_PACK, SHOOT, WALK, HIT, DEATH, JUMP
     }
 }

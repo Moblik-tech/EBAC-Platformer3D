@@ -5,7 +5,9 @@ public class HealthBase : MonoBehaviour, IDamageable
 {
     [Header("<------ Health General Configs ------>")]
     public int startLife = 10;
-    [NaughtyAttributes.ReadOnly] public int _currentLife;
+    [SerializeField, NaughtyAttributes.ReadOnly] public int _currentLife;
+    public int CurrentLife => _currentLife;
+
     [NaughtyAttributes.ReadOnly] public int damageReductionAmount = 0;
     public bool destroyObjectOnKill = false;
 
@@ -15,7 +17,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     public Action<HealthBase> OnKill;
 
     [Header("UI")]
-    public UIFillUpdater uIFillUpdater;
+    public UIFillUpdater uIHealthUpdater;
 
     private void Awake()
     {
@@ -29,7 +31,12 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     public void ResetLife()
     {
-        _currentLife = startLife;
+        SetLife(startLife);
+    }
+
+    public void SetLife(int value)
+    {
+        _currentLife = Mathf.Clamp(value, 0, startLife);
         UpdateUI();
     }
 
@@ -59,16 +66,11 @@ public class HealthBase : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage(int damage, Vector3 knockbackDirection)
-    {
-        Damage(damage);
-    }
-
     private void UpdateUI()
     {
-        if (uIFillUpdater != null)
+        if (uIHealthUpdater != null)
         {
-            uIFillUpdater.UpdateValue(startLife, _currentLife);
+            uIHealthUpdater.UpdateValue(startLife, _currentLife);
         }
     }
 

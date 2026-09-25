@@ -1,7 +1,8 @@
 {
-    "currentLevelNumber": 0,
-    "coinAmount": 0,
-    "lifePackAmount": 0,
-    "playerCurrentHealth": 10.0,
+    "currentCheckPointKey": 0,
+    "coinAmount": 2,
+    "lifePackAmount": 1,
+    "hasPlayerData": true,
+    "playerCurrentHealth": 10,
     "currentArmour": 0
 }

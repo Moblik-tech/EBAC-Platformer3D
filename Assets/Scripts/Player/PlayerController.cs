@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Moblik.Core.Singleton;
@@ -12,7 +11,6 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Movement")]
     public float speed = 5f;
-
     public float turnSpeed = 1f;
     public float gravity = 9.8f;
     public float jumpForce = 15f;
@@ -30,8 +28,7 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Armour")]
     [SerializeField] private ArmourChanger _armourChanger;
-    [SerializeField] private ArmourType _currentArmour = ArmourType.NONE;
-
+    [SerializeField, NaughtyAttributes.ReadOnly] private ArmourType _currentArmour = ArmourType.NONE;
     public ArmourType CurrentArmour => _currentArmour;
 
     protected override void Awake()
@@ -44,10 +41,17 @@ public class PlayerController : Singleton<PlayerController>
         healthBase.OnKill += OnKill;
     }
 
+    private void Start()
+    {
+        GetPlayerStats();
+    }
+
     private void Update()
     {
         Movement();
     }
+
+    #region MOVEMENT
 
     private void Movement()
     {
@@ -105,7 +109,18 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
+    #endregion
+
     #region LIFE
+
+    private void GetPlayerStats()
+    {
+        if (SaveManager.Instance == null && !SaveManager.Instance.IsLoaded) return;
+
+        var save = SaveManager.Instance.Setup;
+
+        ChangeArmour(save.currentArmour);
+    }
 
     public void Damage(HealthBase h)
     {

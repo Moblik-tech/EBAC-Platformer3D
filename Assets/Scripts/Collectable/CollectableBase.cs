@@ -1,4 +1,5 @@
 using UnityEngine;
+using Moblik.Utils;
 
 namespace Moblik.Items
 {
@@ -14,6 +15,7 @@ namespace Moblik.Items
         public ParticleSystem collectionParticleSystem;
 
         [Header("SFX")]
+        public SFXType audioType;
         public AudioSource collectionAudioSource;
 
         void OnTriggerEnter(Collider other)
@@ -32,15 +34,10 @@ namespace Moblik.Items
             Invoke(nameof(HideItem), delayToHideObject);
         }
 
-        private void HideItem()
-        {
-            gameObject.SetActive(false);
-        }
-
         protected virtual void OnCollect()
         {
             if (collectionParticleSystem != null) collectionParticleSystem.Play();
-            if (collectionAudioSource != null) collectionAudioSource.Play();
+            if (collectionAudioSource != null) PlaySFX();
 
             foreach (var collider in objectCollider)
             {
@@ -48,6 +45,16 @@ namespace Moblik.Items
             }
 
             //Debug.Log($"{gameObject.name} collected.");
+        }
+
+        private void PlaySFX()
+        {
+            SFXPool.Instance.PlaySFX(audioType);
+        }
+
+        private void HideItem()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

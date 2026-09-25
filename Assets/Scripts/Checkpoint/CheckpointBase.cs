@@ -5,7 +5,7 @@ public class CheckpointBase : MonoBehaviour
     public MeshRenderer meshRenderer;
     [Min(1)] public int key = 1;
 
-    [SerializeField, NaughtyAttributes.ReadOnly] bool _checkpointActived = false;
+    [SerializeField, NaughtyAttributes.ReadOnly] private bool _checkpointActived = false;
     private string _checkpointKey = "CheckpointKey";
 
     private void Start()
@@ -24,8 +24,8 @@ public class CheckpointBase : MonoBehaviour
     private void UpdateCheckpointStatus()
     {
         SaveCheckpoint();
+        SaveManager.Instance.SaveCurrentGameState();
         ChangeTotemLight(true);
-        SaveManager.Instance.SaveParams();
     }
 
     private void ChangeTotemLight(bool activated)

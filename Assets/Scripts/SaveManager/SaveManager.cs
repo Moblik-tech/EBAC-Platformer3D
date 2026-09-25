@@ -1,103 +1,114 @@
+using Moblik.Core.Singleton;
+using Moblik.Utils;
 using System;
 using System.IO;
 using UnityEngine;
-using Moblik.Core.Singleton;
-using Moblik.Utils;
 
 public class SaveManager : Singleton<SaveManager>
 {
+    [Header("<------ Save Configs ------>")]
     [SerializeField, NaughtyAttributes.ReadOnly] private SaveSetupParams _saveSetup;
+    //private string _path => $"{Application.persistentDataPath}/Save.txt";
+    private string _path => $"{Application.streamingAssetsPath}/Save.txt";
 
-    [Space(15)]
-
-    [Min(0)] public int currentLevelNumber = 0;
-
-    private string _path = $"{Application.streamingAssetsPath}/save.txt";
     public Action<SaveSetupParams> FileLoaded;
 
-    public SaveSetupParams Setup
-    {
-        get { return _saveSetup; }
-    }
+    public SaveSetupParams Setup => _saveSetup;
+    public bool IsLoaded { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
+        LoadGame();
     }
 
-    private void Start()
-    {
-        Invoke(nameof(LoadGame), 0.1f);
-    }
+    #region SAVE
 
     private void CreateNewSave()
     {
         _saveSetup = new SaveSetupParams
         {
-            currentLevelNumber = 0,
+            currentCheckPointKey = 0,
             coinAmount = 0,
             lifePackAmount = 0,
-            playerCurrentHealth = PlayerController.Instance.healthBase.startLife,
+            hasPlayerData = false,
+            playerCurrentHealth = 10,
             currentArmour = ArmourType.NONE
         };
     }
 
-    #region SAVE GAME
+    public void SavePlayerStats(int currentHealth, ArmourType currentArmour)
+    {
+        _saveSetup.playerCurrentHealth = currentHealth;
+        _saveSetup.currentArmour = currentArmour;
+
+        SaveGame();
+    }
+
+    public void SaveInventory(int coinAmount, int lifePackAmount)
+    {
+        _saveSetup.coinAmount = coinAmount;
+        _saveSetup.lifePackAmount = lifePackAmount;
+
+        SaveGame();
+    }
+
+    public void SaveLastCheckPointKey(int checkPointKey)
+    {
+        _saveSetup.currentCheckPointKey = checkPointKey;
+
+        SaveGame();
+    }
+
+    public void SaveCurrentGameState()
+    {
+        if (PlayerController.Instance != null)
+        {
+            _saveSetup.hasPlayerData = true;
+            _saveSetup.playerCurrentHealth = PlayerController.Instance.healthBase.CurrentLife;
+            _saveSetup.currentArmour = PlayerController.Instance.CurrentArmour;
+        }
+
+        if (Moblik.Manager.InventoryManager.Instance != null)
+        {
+            var inventory = Moblik.Manager.InventoryManager.Instance;
+
+            _saveSetup.coinAmount = inventory.GetItemByType(Moblik.Utils.ItemType.COIN).scriptobInt.amount;
+            _saveSetup.lifePackAmount = inventory.GetItemByType(Moblik.Utils.ItemType.LIFE_PACK).scriptobInt.amount;
+        }
+
+        SaveGame();
+    }
 
     [NaughtyAttributes.Button]
     private void SaveGame()
     {
-        string setupToJson = JsonUtility.ToJson(_saveSetup, true);
+        if (_saveSetup == null)
+        {
+            Debug.LogWarning("Não foi possível salvar: SaveSetupParams não foi inicializado.");
+            return;
+        }
 
-        SaveFile(setupToJson);
-        Debug.Log(setupToJson);
-    }
+        string json = JsonUtility.ToJson(_saveSetup, true);
 
-    public void SaveParams()
-    {
-        var player = PlayerController.Instance;
+        File.WriteAllText(_path, json);
 
-        _saveSetup.playerCurrentHealth = player.healthBase._currentLife;
-        _saveSetup.currentArmour = player.CurrentArmour;
-
-        SaveItemsAmount();
-    }
-
-    public void SaveLastLevel(int levelNumber)
-    {
-        _saveSetup.currentLevelNumber = levelNumber;
-
-        SaveItemsAmount();
-        SaveGame();
-    }
-
-    public void SaveItemsAmount()
-    {
-        _saveSetup.coinAmount = Moblik.Manager.InventoryManager.Instance.GetItemByType(Moblik.Utils.ItemType.COIN).scriptobInt.value;
-        _saveSetup.lifePackAmount = Moblik.Manager.InventoryManager.Instance.GetItemByType(Moblik.Utils.ItemType.LIFE_PACK).scriptobInt.value;
-
-        SaveGame();
+        Debug.Log($"Save criado em: {_path}");
+        Debug.Log(json);
     }
 
     #endregion
 
-    private void SaveFile(string json)
-    {
-        Debug.Log(_path);
-        File.WriteAllText(_path, json);
-    }
-
-    #region LOAD GAME
+    #region LOAD
 
     [NaughtyAttributes.Button]
     private void LoadGame()
     {
         if (File.Exists(_path))
         {
-            string fileLoaded = File.ReadAllText(_path);
+            string json = File.ReadAllText(_path);
 
-            _saveSetup = JsonUtility.FromJson<SaveSetupParams>(fileLoaded);
-            currentLevelNumber = _saveSetup.currentLevelNumber;
+            _saveSetup = JsonUtility.FromJson<SaveSetupParams>(json);
         }
         else
         {
@@ -105,13 +116,8 @@ public class SaveManager : Singleton<SaveManager>
             SaveGame();
         }
 
-        ApplySaveData();
+        IsLoaded = true;
         FileLoaded?.Invoke(_saveSetup);
-    }
-
-    private void ApplySaveData()
-    {
-        PlayerController.Instance.ChangeArmour(_saveSetup.currentArmour);
     }
 
     #endregion

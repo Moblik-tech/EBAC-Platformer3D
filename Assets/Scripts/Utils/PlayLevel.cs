@@ -13,7 +13,7 @@ public class PlayLevel : MonoBehaviour
 
     public void OnLoad(SaveSetupParams setup)
     {
-        uiTextName.text = $"{uiTextName.text} {setup.currentLevelNumber + 1}";
+        uiTextName.text = $"{uiTextName.text} {setup.currentCheckPointKey + 1}";
     }
 
     private void OnDestroy()

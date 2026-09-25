@@ -7,12 +7,13 @@ namespace Moblik.Utils
     public class SaveSetupParams
     {
         [Header("Level Setup")]
-        public int currentLevelNumber;
+        public int currentCheckPointKey;
         public int coinAmount;
         public int lifePackAmount;
 
         [Header("Player Setup")]
-        public float playerCurrentHealth;
+        public bool hasPlayerData;
+        public int playerCurrentHealth;
         public ArmourType currentArmour;
     }
 
@@ -44,5 +45,19 @@ namespace Moblik.Utils
     {
         public AnimationType animationType;
         public string triggerName;
+    }
+
+    [Serializable]
+    public class MusicSetup
+    {
+        public MusicType musicType;
+        public AudioClip audioClip;
+    }
+
+    [Serializable]
+    public class SFXSetup
+    {
+        public SFXType sFXType;
+        public AudioClip audioClip;
     }
 }
